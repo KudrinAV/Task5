@@ -1,14 +1,26 @@
-﻿@{
-    ViewBag.Title = "";
+﻿@model IEnumerable<PresentationLayer.ViewModels.SaleViewModel>
+@{
+    ViewBag.Title = "Таблица продаж";
 }
+
 
 <div>
     <h3>Данные</h3>
     <table>
         <tr>
-            <tb><p>ПРивет</p></tb>
-            <tb><p>Мир</p></tb>
-            <tb><p>!</p></tb>
+            <td>ПРивет</td>
+            <td>Мир</td>
+            <td>!</td>
         </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>Мир</td>
+                <td>!</td>
+            </tr>
+        }
     </table>
 </div>
