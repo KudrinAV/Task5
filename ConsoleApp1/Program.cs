@@ -12,13 +12,14 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            IBridgeToBLL test = new BridgeToBLL();
-
-            foreach(var item in test.GetSales()){
-                Console.WriteLine(item.Price);
+            using (IBridgeToBLL test = new BridgeToBLL())
+            {
+                foreach(var item in test.GetRoles("admin"))
+                {
+                    Console.WriteLine(item);
+                }
             }
-
-            Console.ReadLine();
+                
         }
 
     }

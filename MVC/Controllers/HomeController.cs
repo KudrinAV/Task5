@@ -18,6 +18,7 @@ namespace MVC.Controllers
             return result;
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -25,6 +26,7 @@ namespace MVC.Controllers
             return View();
         }
 
+        [Authorize(Roles="admin")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
