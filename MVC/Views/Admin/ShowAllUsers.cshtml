@@ -1,0 +1,26 @@
+﻿@model PresentationLayer.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "ShowAllUsers";
+}
+
+<div>
+    <h3>Все пользователи</h3>
+    <table>
+        <tr>
+            <td><p>Login</p></td>
+            <td><p>Password</p></td>
+            <td></td>
+        </tr>
+        @foreach(var item in ViewBag.Users)
+        {
+            <tr>
+                @{
+                    string login = item.Login;
+                }
+                <td><p>@login</p></td>
+                <td><p>@item.Password</p></td>
+                <td><p><a href="/Admin/EditUser/@login">Изменить</a></p></td>
+            </tr>
+        }
+    </table>
+</div>
