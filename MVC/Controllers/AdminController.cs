@@ -53,19 +53,15 @@ namespace MVC.Controllers
 
         public ActionResult EditUser(string login)
         {
-            ModelState.AddModelError("", "test");
-            ModelState.AddModelError("", login);
-            ViewData["Login"] = login;
-            return View();
+            EditUserModel m = new EditUserModel();
+            m.OldLogin = login;
+            return View(m);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(EditUserModel user)
         {
-            ModelState.AddModelError("", user.OldLogin);
-            ModelState.AddModelError("", user.NewLogin);
-            ModelState.AddModelError("", user.NewPassword);
             if (ModelState.IsValid)
             {
                 using (IBridgeToBLL db = new BridgeToBLL())

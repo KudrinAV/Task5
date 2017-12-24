@@ -1,4 +1,4 @@
-﻿@model PresentationLayer.ViewModels.UserViewModel
+﻿
 @{
     ViewBag.Title = "ShowAllUsers";
 }
@@ -14,12 +14,9 @@
         @foreach(var item in ViewBag.Users)
         {
             <tr>
-                @{
-                    string login = item.Login;
-                }
-                <td><p>@login</p></td>
+                <td><p>@item.Login</p></td>
                 <td><p>@item.Password</p></td>
-                <td><p><a href="/Admin/EditUser/@login">Изменить</a></p></td>
+                <td><p>@Html.ActionLink("Изменить", "EditUser", "Admin", new { login = item.Login }, null)</p></td>
             </tr>
         }
     </table>
