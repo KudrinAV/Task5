@@ -17,7 +17,8 @@
                 <td><p>@item.Login</p></td>
                 <td><p>@item.Password</p></td>
                 <td><p>@Html.ActionLink("Изменить", "EditUser", "Admin", new { login = item.Login }, null)</p></td>
-            </tr>
+                <td><p>@Html.ActionLink("Удалить", "DeleteUser", "Admin", new { login = item.Login }, null)</p></td>
+           </tr>
         }
     </table>
 </div>

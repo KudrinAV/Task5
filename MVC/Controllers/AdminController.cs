@@ -73,5 +73,19 @@ namespace MVC.Controllers
             
             return View();
         }
+
+
+       
+        public ActionResult DeleteUser(string login)
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                if (db.DeleteUser(login)) return RedirectToAction("ShowAllUsers", "Admin");
+            }
+            return View();
+        }
     }
+    
+
+
 }
