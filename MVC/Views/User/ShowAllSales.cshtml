@@ -1,14 +1,65 @@
-﻿
+﻿@model MVC.Models.FilterModel
 @{
-    ViewBag.Title = "ShowAllUsers";
+    ViewBag.Title = "Все пользователи";
 }
 
 <h2>ShowAllUsers</h2>
+
+
 <div>
-    @using(Ajax.BeginForm("ManagerSearch", "User", new AjaxOptions { UpdateTargetId= "results"}))
-     {       
-        <input type="text" name="name" />
-        <input type="submit" value="Поиск"/>
-     }
-     <div id="results"></div>
+    <p>@Html.ActionLink("Добавить данные о продаже", "CreateSale", "User")</p>
 </div>
+
+
+
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Менеджеры: </label>
+        @Html.DropDownList("manager", Model.Managers as SelectList,
+                    htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Товар: </label>
+        @Html.DropDownList("product", Model.Products as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Дата: </label>
+        @Html.DropDownList("date", Model.Dates as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+
+
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+
+
+<table>
+    <tr>
+        <th>Дата</th>
+        <th>Клиент</th>
+        <th>Цена</th>
+        <th>Товар</th>
+        <th>ManagerId</th>
+    </tr>
+
+    @foreach (var item in Model.Sales)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagerID)
+            </td>
+        </tr>
+    }
+</table>
+
