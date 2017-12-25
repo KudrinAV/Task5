@@ -20,15 +20,13 @@ namespace MVC.Controllers
         }
 
         [Authorize(Roles = "user")]
-        public ActionResult ShowAllSales(int? manager, string product )
+        public ActionResult ShowAllSales(int? manager, string product, string date )
         {
             using (IBridgeToBLL db = new BridgeToBLL())
             {
                 IEnumerable<SaleViewModel> sales = db.GetSales();
-                IList<ManagerViewModel> managers = db.GetManagers().ToList();
-                managers.Insert(0, new ManagerViewModel { ManagerID = 0, LastName="Все" } );
-
-                DateTime date = new DateTime();
+                
+                
                 if (manager!=0 && manager!=null)
                 {
                     sales = sales.Where(x =>x.ManagerId == manager);
@@ -38,21 +36,29 @@ namespace MVC.Controllers
                 {
                     sales = sales.Where(x => x.Product == product);
                 }
-                //if(date != null)
-                //{
-                //    sales = sales.Where(x => x.Date.Day == date.Day && x.Date.Month == date.Month && x.Date.Year == date.Year);
-                //}
+                if (date != null && !date.Equals("Даты нет"))
+                {
+                    DateTime time;
+                    DateTime.TryParse(date, out time);
+                    sales = sales.Where(x => x.Date.Day == time.Day && x.Date.Month == time.Month && x.Date.Year == time.Year);
+                }
+                IList<ManagerViewModel> managers = db.GetManagers().ToList();
+                managers.Insert(0, new ManagerViewModel { ManagerID = 0, LastName = "Все" });
                 IList<string> products = sales.Select(x=>x.Product).Distinct().ToList();
                 products.Insert(0, "Любой");
                 IList<DateTime> dates = sales.Select(x => x.Date).Distinct().ToList();
-
-                //ViewBag.Sales = db.GetSales();
+                IList<string> datesForFilter = new List<string>();
+                foreach(var item in dates)
+                {
+                    datesForFilter.Add(String.Format("{0:d}", item));
+                }
+                datesForFilter.Insert(0, "Даты нет");
                 FilterModel filter = new FilterModel
                 {
                     Sales = sales,
                     Managers = new SelectList(managers, "ManagerId", "LastName"),
                     Products = new SelectList(products),
-                    Dates = new SelectList(dates)
+                    Dates = new SelectList(datesForFilter)
                 };
                 return View(filter);
             }
