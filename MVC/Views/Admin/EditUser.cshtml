@@ -15,7 +15,7 @@
         <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.OldLogin, "test2")
+        @Html.HiddenFor(model => model.OldLogin)
         <div class="form-group">
             @Html.Label("Новый логин" , htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

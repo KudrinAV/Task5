@@ -25,4 +25,6 @@ namespace MVC.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
+
+
 }

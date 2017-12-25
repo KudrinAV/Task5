@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "ShowAllManagers";
+}
+
+<h2>ShowAllManagers</h2>
+
+<div>
+    <h3>Все пользователи</h3>
+    <div>
+        <p>@Html.ActionLink("Добавить", "CreateManager", "Admin")</p>
+    </div>
+    <table>
+        <tr>
+            <td><p>Name</p></td>
+            <td></td>
+        </tr>
+        @foreach (var item in ViewBag.Managers)
+        {
+            <tr>
+                <td><p>@item.LastName</p></td>
+                <td><p>@Html.ActionLink("Изменить", "EditManager", "Admin", new { name = item.LastName }, null)</p></td>
+                <td><p>@Html.ActionLink("Удалить", "DeleteManager", "Admin", new { name = item.LastName }, null)</p></td>
+            </tr>
+        }
+    </table>
+</div>

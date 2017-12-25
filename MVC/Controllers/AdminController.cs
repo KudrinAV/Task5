@@ -84,8 +84,73 @@ namespace MVC.Controllers
             }
             return View();
         }
+
+        public ActionResult ShowAllManagers()
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                ViewBag.Managers = db.GetManagers();
+            }
+            return View();
+        }
+
+        // Get : CreateUser
+        public ActionResult CreateManager()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateManager(ManagerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (IBridgeToBLL db = new BridgeToBLL())
+                {
+
+                    if (db.CreateManager(model.Name)) return RedirectToAction("Index", "Admin");
+                    else ModelState.AddModelError("", "Пользователя с таким логином уже есть");
+                }
+            }
+            return View(model);
+        }
+
+
+
+        public ActionResult EditManager(string name)
+        {
+            EditManagerModel m = new EditManagerModel();
+            m.OldName = name;
+            return View(m);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditManager(EditManagerModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                using (IBridgeToBLL db = new BridgeToBLL())
+                {
+                    if (db.EditManager(user.OldName, user.NewName)) return RedirectToAction("ShowAllManagers", "Admin");
+                    else ModelState.AddModelError("", "Неудалось изменить аккаунт");
+                }
+            }
+
+            return View();
+        }
+
+
+
+        public ActionResult DeleteManager(string name)
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                if (db.DeleteManager(name)) return RedirectToAction("ShowAllManagers", "Admin");
+            }
+            return View();
+        }
     }
     
-
-
 }

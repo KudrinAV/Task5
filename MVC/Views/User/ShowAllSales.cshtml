@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "ShowAllSales";
+}
+
+<h2>ShowAllSales</h2>
+
+<div>
+    <h3>Все пользователи</h3>
+    <table>
+        <tr>
+            <td><p>Date</p></td>
+            <td><p>Client</p></td>
+            <td><p>Product</p></td>
+            <td><p>Price</p></td>
+            <td></td>
+        </tr>
+        @foreach (var item in ViewBag.Sales)
+        {
+            <tr>
+                <td><p>@item.Date</p></td>
+                <td><p>@item.Client</p></td>
+                <td><p>@item.Product</p></td>
+                <td><p>@item.Price</p></td>
+            </tr>
+        }
+    </table>
+</div>
