@@ -53,6 +53,17 @@ namespace MVC.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult ManagerSearch(string name)
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                
+                return PartialView(db.FilterByManager(name));
+               
+            }
+        }
+
         [Authorize(Roles = "user")]
         public ActionResult ShowAllManagers()
         {

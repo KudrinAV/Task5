@@ -4,28 +4,11 @@
 }
 
 <h2>ShowAllUsers</h2>
-
 <div>
-    <h3>Все пользователи</h3>
-    <div>
-        <p>@Html.ActionLink("Добавить", "CreateSale", "User")</p>
-    </div>
-    <table>
-        <tr>
-            <td><p>Date</p></td>
-            <td><p>Client</p></td>
-            <td><p>Product</p></td>
-            <td><p>Price</p></td>
-        </tr>
-        @foreach (var item in ViewBag.Sales)
-        {
-            <tr>
-                <td><p>@item.Date</p></td>
-                <td><p>@item.Client</p></td>
-                <td><p>@item.Product</p></td>
-                <td><p>@item.Price</p></td>
-                <td><p></p></td>
-            </tr>
-        }
-    </table>
+    @using(Ajax.BeginForm("ManagerSearch", "User", new AjaxOptions { UpdateTargetId= "results"}))
+     {       
+        <input type="text" name="name" />
+        <input type="submit" value="Поиск"/>
+     }
+     <div id="results"></div>
 </div>
