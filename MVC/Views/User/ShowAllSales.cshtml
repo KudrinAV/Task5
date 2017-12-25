@@ -1,19 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "ShowAllSales";
+    ViewBag.Title = "ShowAllUsers";
 }
 
-<h2>ShowAllSales</h2>
+<h2>ShowAllUsers</h2>
 
 <div>
     <h3>Все пользователи</h3>
+    <div>
+        <p>@Html.ActionLink("Добавить", "CreateSale", "User")</p>
+    </div>
     <table>
         <tr>
             <td><p>Date</p></td>
             <td><p>Client</p></td>
             <td><p>Product</p></td>
             <td><p>Price</p></td>
-            <td></td>
         </tr>
         @foreach (var item in ViewBag.Sales)
         {
@@ -22,6 +24,7 @@
                 <td><p>@item.Client</p></td>
                 <td><p>@item.Product</p></td>
                 <td><p>@item.Price</p></td>
+                <td><p></p></td>
             </tr>
         }
     </table>

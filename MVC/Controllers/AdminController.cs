@@ -10,22 +10,25 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    [Authorize(Roles = "admin")]
+    
     public class AdminController : Controller
     {
         // GET: Admin
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View();
         }
 
         // Get : CreateUser
+        [Authorize(Roles = "admin")]
         public ActionResult CreateUser()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateUser(CreateUserModel model)
         {
@@ -42,6 +45,7 @@ namespace MVC.Controllers
         }
 
         //Get: ShowAllUsers
+        [Authorize(Roles = "admin")]
         public ActionResult ShowAllUsers()
         {
             using(IBridgeToBLL db = new BridgeToBLL())
@@ -51,14 +55,18 @@ namespace MVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult EditUser(string login)
         {
-            EditUserModel m = new EditUserModel();
-            m.OldLogin = login;
+            EditUserModel m = new EditUserModel
+            {
+                OldLogin = login
+            };
             return View(m);
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(EditUserModel user)
         {
@@ -75,7 +83,7 @@ namespace MVC.Controllers
         }
 
 
-       
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteUser(string login)
         {
             using (IBridgeToBLL db = new BridgeToBLL())
@@ -85,6 +93,7 @@ namespace MVC.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult ShowAllManagers()
         {
             using (IBridgeToBLL db = new BridgeToBLL())
@@ -95,12 +104,14 @@ namespace MVC.Controllers
         }
 
         // Get : CreateUser
+        [Authorize(Roles = "admin")]
         public ActionResult CreateManager()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateManager(ManagerModel model)
         {
@@ -117,15 +128,18 @@ namespace MVC.Controllers
         }
 
 
-
+        [Authorize(Roles = "admin")]
         public ActionResult EditManager(string name)
         {
-            EditManagerModel m = new EditManagerModel();
-            m.OldName = name;
+            EditManagerModel m = new EditManagerModel
+            {
+                OldName = name
+            };
             return View(m);
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult EditManager(EditManagerModel user)
         {
@@ -142,7 +156,7 @@ namespace MVC.Controllers
         }
 
 
-
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteManager(string name)
         {
             using (IBridgeToBLL db = new BridgeToBLL())
@@ -152,7 +166,7 @@ namespace MVC.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "admin")]
         public ActionResult ShowAllSales()
         {
             using (IBridgeToBLL db = new BridgeToBLL())
@@ -163,12 +177,14 @@ namespace MVC.Controllers
         }
 
         // Get : CreateUser
+        [Authorize(Roles = "admin")]
         public ActionResult CreateSale()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateSale(SaleModel model)
         {
@@ -185,15 +201,18 @@ namespace MVC.Controllers
         }
 
 
-
+        [Authorize(Roles = "admin")]
         public ActionResult EditSale(int Id)
         {
-            EditSaleModel m = new EditSaleModel();
-            m.Id = Id;
+            EditSaleModel m = new EditSaleModel
+            {
+                Id = Id
+            };
             return View(m);
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public ActionResult EditSale(EditSaleModel sale)
         {
@@ -212,7 +231,7 @@ namespace MVC.Controllers
         }
 
 
-
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteSale(int Id)
         {
             using (IBridgeToBLL db = new BridgeToBLL())

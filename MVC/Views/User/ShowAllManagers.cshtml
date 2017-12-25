@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "ShowAllManagers";
+}
+
+<h2>ShowAllManagers</h2>
+
+<div>
+    <h3>Все пользователи</h3>
+    <table>
+        <tr>
+            <td><p>Name</p></td>
+            <td></td>
+        </tr>
+        @foreach (var item in ViewBag.Managers)
+        {
+            <tr>
+                <td><p>@item.LastName</p></td>
+            </tr>
+        }
+    </table>
+</div>

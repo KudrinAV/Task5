@@ -154,6 +154,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,10 @@
     <Content Include="Views\Admin\CreateSale.cshtml" />
     <Content Include="Views\Admin\ShowAllSales.cshtml" />
     <Content Include="Views\Admin\EditSale.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\ShowAllSales.cshtml" />
+    <Content Include="Views\User\ShowAllManagers.cshtml" />
+    <Content Include="Views\User\CreateSale.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
