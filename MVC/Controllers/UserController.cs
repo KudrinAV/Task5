@@ -31,7 +31,7 @@ namespace MVC.Controllers
                 DateTime date = new DateTime();
                 if (manager!=0 && manager!=null)
                 {
-                    sales = sales.Where(x =>x.ManagerID == manager);
+                    sales = sales.Where(x =>x.ManagerId == manager);
                     
                 }
                 if (!String.IsNullOrEmpty(product) && !product.Equals("Любой"))
