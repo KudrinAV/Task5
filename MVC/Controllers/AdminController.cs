@@ -201,7 +201,9 @@ namespace MVC.Controllers
             {
                 using (IBridgeToBLL db = new BridgeToBLL())
                 {
-                    if (db.EditSale(sale.Id,new SaleViewModel(DateTime.Now, sale.Client,sale.Product, sale.Price, (int) db.GetManagerId(sale.ManagerName)))) return RedirectToAction("ShowAllSales", "Admin");
+                    int managerId = 0;
+                    if (sale.ManagerName != null) managerId = (int)db.GetManagerId(sale.ManagerName);
+                    if (db.EditSale(sale.Id,new SaleViewModel(DateTime.Now, sale.Client,sale.Product, sale.Price, managerId))) return RedirectToAction("ShowAllSales", "Admin");
                     else ModelState.AddModelError("", "Неудалось изменить аккаунт");
                 }
             }
