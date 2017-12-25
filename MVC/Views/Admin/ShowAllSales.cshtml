@@ -8,7 +8,7 @@
 <div>
 <h3>Все пользователи</h3>
     <div>
-        <p>@Html.ActionLink("Добавить", "AddSale", "Admin")</p>
+        <p>@Html.ActionLink("Добавить", "CreateSale", "Admin")</p>
     </div>
 <table>
     <tr>
@@ -25,9 +25,10 @@
             <td><p>@item.Client</p></td>
             <td><p>@item.Product</p></td>
             <td><p>@item.Price</p></td>
+            <td><p>@item.ManagerId</p></td>
             <td><p></p></td>
-            <td><p>@Html.ActionLink("Изменить", "EditSale", "Admin", new { login = item.Login }, null)</p></td>
-            <td><p>@Html.ActionLink("Удалить", "DeleteSale", "Admin", new { login = item.Login }, null)</p></td>
+            <td><p>@Html.ActionLink("Изменить", "EditSale", "Admin", new { id= item.SaleId }, null)</p></td>
+            <td><p>@Html.ActionLink("Удалить", "DeleteSale", "Admin", new { id = item.SaleId }, null)</p></td>
         </tr>
     }
 </table>

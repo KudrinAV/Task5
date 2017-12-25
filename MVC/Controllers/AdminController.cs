@@ -151,6 +151,74 @@ namespace MVC.Controllers
             }
             return View();
         }
+
+
+        public ActionResult ShowAllSales()
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                ViewBag.Sales = db.GetSales();
+            }
+            return View();
+        }
+
+        // Get : CreateUser
+        public ActionResult CreateSale()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateSale(SaleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (IBridgeToBLL db = new BridgeToBLL())
+                {
+
+                    if (db.CreateSale(new SaleViewModel(DateTime.Now, model.Client, model.Product, model.Price, 1))) return RedirectToAction("ShowAllSales", "Admin");
+                    else ModelState.AddModelError("", "Пользователя с таким логином уже есть");
+                }
+            }
+            return View(model);
+        }
+
+
+
+        public ActionResult EditSale(int Id)
+        {
+            EditSaleModel m = new EditSaleModel();
+            m.Id = Id;
+            return View(m);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSale(EditSaleModel sale)
+        {
+            if (ModelState.IsValid)
+            {
+                using (IBridgeToBLL db = new BridgeToBLL())
+                {
+                    if (db.EditSale(sale.Id,new SaleViewModel(DateTime.Now, sale.Client,sale.Product, sale.Price, (int) db.GetManagerId(sale.ManagerName)))) return RedirectToAction("ShowAllSales", "Admin");
+                    else ModelState.AddModelError("", "Неудалось изменить аккаунт");
+                }
+            }
+
+            return View();
+        }
+
+
+
+        public ActionResult DeleteSale(int Id)
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                if (db.DeleteSale(Id)) return RedirectToAction("ShowAllSales", "Admin");
+            }
+            return View();
+        }
     }
     
 }
