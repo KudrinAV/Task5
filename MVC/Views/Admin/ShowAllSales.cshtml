@@ -1,35 +1,63 @@
-﻿
+﻿@model MVC.Models.FilterModel
 @{
-    ViewBag.Title = "ShowAllSales";
+    ViewBag.Title = "Все пользователи";
 }
 
-<h2>ShowAllSales</h2>
+<h2>ShowAllUsers</h2>
+
 
 <div>
-<h3>Все пользователи</h3>
-    <div>
-        <p>@Html.ActionLink("Добавить", "CreateSale", "Admin")</p>
+    <p>@Html.ActionLink("Добавить данные о продаже", "CreateSale", "Admin")</p>
+</div>
+
+
+
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Менеджеры: </label>
+        @Html.DropDownList("manager", Model.Managers as SelectList,
+                    htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Товар: </label>
+        @Html.DropDownList("product", Model.Products as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Дата: </label>
+        @Html.DropDownList("date", Model.Dates as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+
+
+        <input type="submit" value="Фильтр" class="btn btn-default" />
     </div>
+</form>
+
+
 <table>
     <tr>
-        <td><p>Date</p></td>
-        <td><p>Client</p></td>
-        <td><p>Product</p></td>
-        <td><p>Price</p></td>
-        <td><p>ManagerName</p></td>
+        <th>Дата</th>
+        <th>Клиент</th>
+        <th>Цена</th>
+        <th>Товар</th>
     </tr>
-    @foreach (var item in ViewBag.Sales)
+
+    @foreach (var item in Model.Sales)
     {
         <tr>
-            <td><p>@item.Date</p></td>
-            <td><p>@item.Client</p></td>
-            <td><p>@item.Product</p></td>
-            <td><p>@item.Price</p></td>
-            <td><p>@item.ManagerId</p></td>
-            <td><p></p></td>
-            <td><p>@Html.ActionLink("Изменить", "EditSale", "Admin", new { id= item.SaleId }, null)</p></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td><p>@Html.ActionLink("Изменить", "EditSale", "Admin", new { id = item.SaleId }, null)</p></td>
             <td><p>@Html.ActionLink("Удалить", "DeleteSale", "Admin", new { id = item.SaleId }, null)</p></td>
         </tr>
     }
 </table>
-</div>
+ 

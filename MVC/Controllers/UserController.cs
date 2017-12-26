@@ -83,7 +83,7 @@ namespace MVC.Controllers
                 using (IBridgeToBLL db = new BridgeToBLL())
                 {
 
-                    if (db.CreateSale(new SaleViewModel(DateTime.Now, model.Client, model.Product, model.Price, 1))) return RedirectToAction("ShowAllSales", "Admin");
+                    if (db.CreateSale(new SaleViewModel(DateTime.Now, model.Client, model.Product, model.Price, db.GetManagerIdForUser(User.Identity.Name)))) return RedirectToAction("ShowAllSales", "Admin");
                     else ModelState.AddModelError("", "Пользователя с таким логином уже есть");
                 }
             }

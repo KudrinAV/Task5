@@ -29,7 +29,7 @@ namespace MVC.Controllers
                 {
                     if (db.CheckUser(model.Login, model.Password))
                     {
-                        FormsAuthentication.SetAuthCookie(model.Login, true);
+                        FormsAuthentication.SetAuthCookie(model.Login , true);
                         return RedirectToAction("Index", "Home");
                     }
                     else ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
