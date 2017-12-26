@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services;
 
 namespace MVC.Controllers
 {
@@ -20,17 +21,17 @@ namespace MVC.Controllers
         }
 
         [Authorize(Roles = "user")]
-        public ActionResult ShowAllSales(int? manager, string product, string date )
+        public ActionResult ShowAllSales(int? manager, string product, string date)
         {
             using (IBridgeToBLL db = new BridgeToBLL())
             {
                 IEnumerable<SaleViewModel> sales = db.GetSales();
-                
-                
-                if (manager!=0 && manager!=null)
+
+
+                if (manager != 0 && manager != null)
                 {
-                    sales = sales.Where(x =>x.ManagerId == manager);
-                    
+                    sales = sales.Where(x => x.ManagerId == manager);
+
                 }
                 if (!String.IsNullOrEmpty(product) && !product.Equals("Любой"))
                 {
@@ -44,11 +45,11 @@ namespace MVC.Controllers
                 }
                 IList<ManagerViewModel> managers = db.GetManagers().ToList();
                 managers.Insert(0, new ManagerViewModel { ManagerID = 0, LastName = "Все" });
-                IList<string> products = sales.Select(x=>x.Product).Distinct().ToList();
+                IList<string> products = sales.Select(x => x.Product).Distinct().ToList();
                 products.Insert(0, "Любой");
                 IList<DateTime> dates = sales.Select(x => x.Date).Distinct().ToList();
                 IList<string> datesForFilter = new List<string>();
-                foreach(var item in dates)
+                foreach (var item in dates)
                 {
                     datesForFilter.Add(String.Format("{0:d}", item));
                 }
@@ -62,7 +63,7 @@ namespace MVC.Controllers
                 };
                 return View(filter);
             }
-            
+
         }
 
         // Get : CreateUser
@@ -94,9 +95,9 @@ namespace MVC.Controllers
         {
             using (IBridgeToBLL db = new BridgeToBLL())
             {
-                
+
                 return PartialView(db.FilterByManager(name));
-               
+
             }
         }
 
@@ -129,9 +130,27 @@ namespace MVC.Controllers
             using (IBridgeToBLL db = new BridgeToBLL())
             {
                 ViewBag.Managers = db.GetManagers();
-                
+
             }
             return View();
         }
+
+        [WebMethod]
+        public JsonResult DrawChart()
+        {
+            ICollection<Models.ManagerChartModel> data = new List<Models.ManagerChartModel>();
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                var sales = db.GetSales();
+                var managers = db.GetManagers();
+                foreach (var item in managers)
+                {
+                    data.Add(new ManagerChartModel { ManagerName = item.LastName, NumberOfSales = sales.Where(x => x.ManagerId == item.ManagerID).Count() });
+                }
+            }
+            return Json(new { Data = data }, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }
+
