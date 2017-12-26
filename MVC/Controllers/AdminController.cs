@@ -70,6 +70,11 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditUser(EditUserModel user)
         {
+            if(user.NewLogin == user.OldLogin && user.NewLogin!=null && user.NewPassword== null)
+            {
+                 ModelState.AddModelError("", "Вы ввели такое же имя");
+                
+            }
             if (ModelState.IsValid)
             {
                 using (IBridgeToBLL db = new BridgeToBLL())
@@ -143,6 +148,10 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditManager(EditManagerModel user)
         {
+            if(user.OldName == user.NewName )
+            {
+                ModelState.AddModelError("", "Вы ввели такое же имя");
+            }
             if (ModelState.IsValid)
             {
                 using (IBridgeToBLL db = new BridgeToBLL())
