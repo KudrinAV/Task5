@@ -9,20 +9,28 @@ namespace MVC.Models
     public class LoginModel
     {
         [Required]
+        [RegularExpression("[d+]", ErrorMessage ="Используйте только символы и цифры")]
+        [StringLength(20, ErrorMessage ="Не больше 20 символов")]
         public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [RegularExpression("[d+]", ErrorMessage = "Используйте только символы и цифры")]
+        [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string Password { get; set; }
     }
 
     public class CreateUserModel
     {
         [Required]
+        [RegularExpression("[d+]", ErrorMessage = "Используйте только символы и цифры")]
+        [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [RegularExpression("[d+]", ErrorMessage = "Используйте только символы и цифры")]
+        [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string Password { get; set; }
     }
 
