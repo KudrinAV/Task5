@@ -8,7 +8,7 @@ namespace MVC.Models
 {
     public class ManagerModel
     {
-        [RegularExpression("[d+]", ErrorMessage = "Используйте только символы и цифры")]
+        [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string Name { get; set; }
     }
@@ -18,7 +18,7 @@ namespace MVC.Models
 
         public string OldName { get; set; }
 
-        [RegularExpression("[d+]", ErrorMessage = "Используйте только символы и цифры")]
+        [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string NewName { get; set; }
     }
