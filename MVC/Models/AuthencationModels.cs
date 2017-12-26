@@ -25,6 +25,11 @@ namespace MVC.Models
         [Required]
         [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
+        public string ManagerName { get; set; }
+
+        [Required]
+        [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
+        [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string Login { get; set; }
 
         [Required]

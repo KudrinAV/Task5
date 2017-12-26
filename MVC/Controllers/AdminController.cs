@@ -37,7 +37,7 @@ namespace MVC.Controllers
                 using(IBridgeToBLL db = new BridgeToBLL())
                 {
                     
-                    if(db.CreateUser(model.Login, model.Password)) return RedirectToAction("Index", "Admin");
+                    if(db.CreateUser(model.ManagerName, model.Login, model.Password)) return RedirectToAction("Index", "Admin");
                     else ModelState.AddModelError("", "Пользователя с таким логином уже есть");
                 }
             }
