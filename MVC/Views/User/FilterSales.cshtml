@@ -1,0 +1,31 @@
+﻿@model MVC.Models.FilterModel
+
+<table>
+    <tr>
+        <th>Дата</th>
+        <th>Клиент</th>
+        <th>Цена</th>
+        <th>Товар</th>
+    </tr>
+
+    @foreach (var item in Model.Sales)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+        </tr>
+    }
+</table>
+
+
+

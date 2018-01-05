@@ -21,7 +21,36 @@ namespace MVC.Controllers
         }
 
         [Authorize(Roles = "user")]
-        public ActionResult ShowAllSales(int? manager, string product, string date)
+        public ActionResult ShowAllSales()
+        {
+            using (IBridgeToBLL db = new BridgeToBLL())
+            {
+                IEnumerable<SaleViewModel> sales = db.GetSales();
+                IList<ManagerViewModel> managers = db.GetManagers().ToList();
+                managers.Insert(0, new ManagerViewModel { ManagerID = 0, LastName = "Все" });
+                IList<string> products = sales.Select(x => x.Product).Distinct().ToList();
+                products.Insert(0, "Любой");
+                IList<DateTime> dates = sales.Select(x => x.Date).Distinct().ToList();
+                IList<string> datesForFilter = new List<string>();
+                foreach (var item in dates)
+                {
+                    datesForFilter.Add(String.Format("{0:d}", item));
+                }
+                datesForFilter.Insert(0, "Даты нет");
+                FilterModel filter = new FilterModel
+                {
+                    Sales = sales,
+                    Managers = new SelectList(managers, "ManagerId", "LastName"),
+                    Products = new SelectList(products),
+                    Dates = new SelectList(datesForFilter)
+                };
+                return View(filter);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult FilterSales(int? manager, string product, string date)
         {
             using (IBridgeToBLL db = new BridgeToBLL())
             {
@@ -61,9 +90,8 @@ namespace MVC.Controllers
                     Products = new SelectList(products),
                     Dates = new SelectList(datesForFilter)
                 };
-                return View(filter);
+                return PartialView(filter);
             }
-
         }
 
         // Get : CreateUser
