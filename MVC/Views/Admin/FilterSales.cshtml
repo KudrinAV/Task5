@@ -1,0 +1,31 @@
+﻿@model MVC.Models.FilterModel
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Дата</th>
+        <th>Клиент</th>
+        <th>Цена</th>
+        <th>Товар</th>
+    </tr>
+
+    @foreach (var item in Model.Sales)
+    {
+        <tr>
+            <td>
+                @item.Date.ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td><p>@Html.ActionLink("Изменить", "EditSale", "Admin", new { id = item.SaleId }, null)</p></td>
+            <td><p>@Html.ActionLink("Удалить", "DeleteSale", "Admin", new { id = item.SaleId }, null)</p></td>
+        </tr>
+    }
+</table>
+
