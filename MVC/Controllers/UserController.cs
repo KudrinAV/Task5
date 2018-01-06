@@ -76,13 +76,14 @@ namespace MVC.Controllers
                 managers.Insert(0, new ManagerViewModel { ManagerID = 0, LastName = "Все" });
                 IList<string> products = sales.Select(x => x.Product).Distinct().ToList();
                 products.Insert(0, "Любой");
-                IList<DateTime> dates = sales.Select(x => x.Date).Distinct().ToList();
+                IList<DateTime> dates = sales.Select(x => x.Date).ToList();
                 IList<string> datesForFilter = new List<string>();
                 foreach (var item in dates)
                 {
                     datesForFilter.Add(String.Format("{0:d}", item));
                 }
                 datesForFilter.Insert(0, "Даты нет");
+                datesForFilter = datesForFilter.Distinct().ToList();
                 FilterModel filter = new FilterModel
                 {
                     Sales = sales,

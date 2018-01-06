@@ -1,6 +1,6 @@
 ﻿@model MVC.Models.FilterModel
 
-<table>
+<table class="table table-bordered table-hover">
     <tr>
         <th>Дата</th>
         <th>Клиент</th>
@@ -12,7 +12,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @item.Date.ToString("dd.MM.yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Client)
