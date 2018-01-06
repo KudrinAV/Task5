@@ -39,5 +39,16 @@ namespace MVC.Controllers
 
             return View(model);
         }
+
+        
+       
+        [Authorize(Roles="admin, user")]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
+
+
 }
