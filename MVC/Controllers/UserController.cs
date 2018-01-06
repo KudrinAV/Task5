@@ -37,6 +37,7 @@ namespace MVC.Controllers
                     datesForFilter.Add(String.Format("{0:d}", item));
                 }
                 datesForFilter.Insert(0, "Даты нет");
+                datesForFilter = datesForFilter.Distinct().ToList();
                 FilterModel filter = new FilterModel
                 {
                     Sales = sales,
@@ -82,8 +83,7 @@ namespace MVC.Controllers
                 {
                     datesForFilter.Add(String.Format("{0:d}", item));
                 }
-                datesForFilter.Insert(0, "Даты нет");
-                datesForFilter = datesForFilter.Distinct().ToList();
+                datesForFilter.Insert(0, "Даты нет");               
                 FilterModel filter = new FilterModel
                 {
                     Sales = sales,
