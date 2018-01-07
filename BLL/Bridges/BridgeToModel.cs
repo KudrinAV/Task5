@@ -12,7 +12,6 @@ using AutoMapper;
 using Model.Entities;
 using BLL.Infrastructure;
 using System.IO;
-using BLL.ParserObj;
 using System.Data.Entity;
 
 namespace BLL.Bridges
@@ -24,12 +23,6 @@ namespace BLL.Bridges
         public BridgeToModel()
         {
             _db = new EFUnitOfWork();
-        }
-
-        private void ParseFile(string path, int id)
-        {
-            Parser parser = new Parser();
-            AddSales(parser.ParserCSV(path, id));
         }
 
         public void AddManager(ManagerDTO manager)
