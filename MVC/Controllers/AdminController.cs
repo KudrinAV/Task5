@@ -94,7 +94,6 @@ namespace MVC.Controllers
                     else ModelState.AddModelError("", "Неудалось изменить аккаунт");
                 }
             }
-            
             return View();
         }
 
@@ -299,7 +298,6 @@ namespace MVC.Controllers
                     else ModelState.AddModelError("", "Неудалось изменить аккаунт");
                 }
             }
-
             return View();
         }
 
@@ -313,12 +311,5 @@ namespace MVC.Controllers
             }
             return View();
         }
-
-        public JsonResult CheckName(string newName, string oldName)
-        {
-            var result = !(newName == oldName);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-    }
-    
+    } 
 }

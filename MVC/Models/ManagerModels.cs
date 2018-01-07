@@ -15,7 +15,6 @@ namespace MVC.Models
 
     public class EditManagerModel
     {
-
         public string OldName { get; set; }
 
         [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
