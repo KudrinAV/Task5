@@ -24,7 +24,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <p class="navbar-text ">Привет, @User.Identity.Name!</p>
-                        <li>@Html.ActionLink("Выход", "LogOff", "Account")</li>
+                        <li>@Ajax.ActionLink("Выход", "LogOff", "Account", new AjaxOptions { HttpMethod = "POST" , OnSuccess= "window.location.reload()"})</li>
                     </ul>
                 </div>
             }

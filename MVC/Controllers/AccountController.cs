@@ -16,6 +16,10 @@ namespace MVC.Controllers
         //Get method
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -41,7 +45,7 @@ namespace MVC.Controllers
         }
 
         
-       
+        [HttpPost]
         [Authorize(Roles="admin, user")]
         public ActionResult LogOff()
         {

@@ -21,7 +21,7 @@
                 <td><p>@item.Password</p></td>
                 <td><p>@item.ManagerName</p></td>
                 <td><p>@Html.ActionLink("Изменить", "EditUser", "Admin", new { login = item.Login }, null)</p></td>
-                <td>@Ajax.ActionLink("Удалить", "DeleteUser", "Admin", new { login = item.Login} , new AjaxOptions { HttpMethod= "POST", Confirm="Вы действительно хотите удалить пользователя?", OnSuccess="" })</td>
+                <td>@Ajax.ActionLink("Удалить", "DeleteUser", "Admin", new { login = item.Login} , new AjaxOptions { HttpMethod= "POST", Confirm="Вы действительно хотите удалить пользователя?", OnSuccess= "window.location.reload()" })</td>
            </tr>
         }
     </table>
