@@ -40,7 +40,7 @@ namespace MVC.Providers
         public override string[] GetRolesForUser(string username)
         {
             string[] roles = new string[] { };
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 // Получаем пользователя
                 roles = db.GetRoles(username);
@@ -56,7 +56,7 @@ namespace MVC.Providers
         public override bool IsUserInRole(string username, string roleName)
         {
             bool ans = false;
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 foreach(var item in db.GetRoles(username))
                 {

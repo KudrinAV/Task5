@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PresentationLayer.Interfaces
 {
-    public interface IBridgeToBLL : IDisposable
+    public interface IPL : IDisposable
     {
         IEnumerable<ManagerViewModel> GetManagers();
         IEnumerable<SaleViewModel> GetSales();

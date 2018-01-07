@@ -16,11 +16,11 @@ using System.Data.Entity;
 
 namespace BLL.Bridges
 {
-    public class BridgeToModel : IBridgeToModel
+    public class BLL : IBLL
     {
         private IUnitOfWork _db;
 
-        public BridgeToModel()
+        public BLL()
         {
             _db = new EFUnitOfWork();
         }

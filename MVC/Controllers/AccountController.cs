@@ -29,7 +29,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {  
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
                     if (db.CheckUser(model.Login, model.Password))
                     {

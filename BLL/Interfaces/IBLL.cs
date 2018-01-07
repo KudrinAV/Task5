@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
-    public interface IBridgeToModel : IDisposable
+    public interface IBLL : IDisposable
     {
         void AddSale(SaleDTO sale);
         void AddSales(ICollection<SaleDTO> sales);

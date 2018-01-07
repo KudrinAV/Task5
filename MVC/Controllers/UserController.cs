@@ -28,7 +28,7 @@ namespace MVC.Controllers
         [Authorize(Roles = "user")]
         public ActionResult ShowAllSales()
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 IEnumerable<SaleViewModel> sales = db.GetSales();
                 IList<ManagerViewModel> managers = db.GetManagers().ToList();
@@ -59,7 +59,7 @@ namespace MVC.Controllers
         [Authorize(Roles = "user")]
         public ActionResult FilterSales(int? manager, string product, string date)
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 IEnumerable<SaleViewModel> sales = db.GetSales();
 
@@ -101,7 +101,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
 
                     if (db.CreateSale(new SaleViewModel(DateTime.Now, model.Client, model.Product, model.Price, db.GetManagerIdForUser(User.Identity.Name)))) return RedirectToAction("ShowAllSales", "User");
@@ -119,7 +119,7 @@ namespace MVC.Controllers
         public ActionResult ShowAllManagers()
         {
 
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 ViewBag.Managers = db.GetManagers();
 
@@ -131,7 +131,7 @@ namespace MVC.Controllers
         public JsonResult DrawChart()
         {
             ICollection<Models.ManagerChartModel> data = new List<Models.ManagerChartModel>();
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 var sales = db.GetSales();
                 var managers = db.GetManagers();

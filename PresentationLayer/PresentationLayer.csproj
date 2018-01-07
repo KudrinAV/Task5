@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bridge\BridgeToBLL.cs" />
-    <Compile Include="Interfaces\IBridgeToBLL.cs" />
+    <Compile Include="PLclasses\PL.cs" />
+    <Compile Include="Interfaces\IPL.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ManagerViewModel.cs" />

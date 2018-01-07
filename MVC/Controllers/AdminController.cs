@@ -34,7 +34,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                using(IBridgeToBLL db = new BridgeToBLL())
+                using(IPL db = new PL())
                 {
                     
                     if(db.CreateUser(model.ManagerName, model.Login, model.Password)) return RedirectToAction("Index", "Admin");
@@ -48,7 +48,7 @@ namespace MVC.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ShowAllUsers()
         {
-            using(IBridgeToBLL db = new BridgeToBLL())
+            using(IPL db = new PL())
             {
                 IEnumerable<UserViewModel> users = db.GetUsers();
                 ICollection<UserModel> usersForShow = new List<UserModel>();
@@ -88,7 +88,7 @@ namespace MVC.Controllers
             }
             if (ModelState.IsValid)
             {
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
                     if (db.EditUser(user.OldLogin, user.NewLogin, user.NewPassword, user.NewManagerName)) return RedirectToAction("ShowAllUsers", "Admin");
                     else ModelState.AddModelError("", "Неудалось изменить аккаунт");
@@ -101,7 +101,7 @@ namespace MVC.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult DeleteUser(string login)
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 if (db.DeleteUser(login)) return RedirectToAction("ShowAllUsers", "Admin");
             }
@@ -111,7 +111,7 @@ namespace MVC.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ShowAllManagers()
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 ViewBag.Managers = db.GetManagers();
             }
@@ -132,7 +132,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
 
                     if (db.CreateManager(model.Name)) return RedirectToAction("Index", "Admin");
@@ -164,7 +164,7 @@ namespace MVC.Controllers
             }
             if (ModelState.IsValid)
             {
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
                     if (db.EditManager(user.OldName, user.NewName)) return RedirectToAction("ShowAllManagers", "Admin");
                     else ModelState.AddModelError("", "Неудалось изменить аккаунт");
@@ -177,7 +177,7 @@ namespace MVC.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ShowAllSales(int? manager, string product, string date)
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 IEnumerable<SaleViewModel> sales = db.GetSales();
                 IList<ManagerViewModel> managers = db.GetManagers().ToList();
@@ -209,7 +209,7 @@ namespace MVC.Controllers
         [Authorize(Roles ="admin")]
         public ActionResult FilterSales(int? manager, string product, string date)
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 IEnumerable<SaleViewModel> sales = db.GetSales();
 
@@ -251,7 +251,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
 
                     if (db.CreateSale(new SaleViewModel(DateTime.Now, model.Client, model.Product, model.Price, db.GetManagerIdForUser(User.Identity.Name)))) return RedirectToAction("ShowAllSales", "Admin");
@@ -279,7 +279,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (IBridgeToBLL db = new BridgeToBLL())
+                using (IPL db = new PL())
                 {
                     int? managerId = 0;
                     if (sale.ManagerName != null && db.GetManagerId(sale.ManagerName)!=null) managerId = db.GetManagerId(sale.ManagerName);
@@ -295,7 +295,7 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult DeleteSale(int Id)
         {
-            using (IBridgeToBLL db = new BridgeToBLL())
+            using (IPL db = new PL())
             {
                 if (db.DeleteSale(Id)) return RedirectToAction("ShowAllSales", "Admin");
             }

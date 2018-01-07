@@ -13,13 +13,13 @@ using System.IO;
 
 namespace PresentationLayer.Bridge
 {
-    public class BridgeToBLL : IBridgeToBLL
+    public class PL : IPL
     {
-        IBridgeToModel _dbConnect;
+        IBLL _dbConnect;
 
-        public BridgeToBLL()
+        public PL()
         {
-            _dbConnect = new BridgeToModel();
+            _dbConnect = new BLL.Bridges.BLL();
         }
         
         public IEnumerable<SaleViewModel> GetSales()
