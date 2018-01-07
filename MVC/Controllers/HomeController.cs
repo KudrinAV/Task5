@@ -10,7 +10,6 @@ namespace MVC.Controllers
     {
         public ActionResult Index()
         {
-
             return View();
         }
 
