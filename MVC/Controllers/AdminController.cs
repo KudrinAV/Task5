@@ -50,7 +50,18 @@ namespace MVC.Controllers
         {
             using(IBridgeToBLL db = new BridgeToBLL())
             {
-                ViewBag.Users = db.GetUsers();
+                IEnumerable<UserViewModel> users = db.GetUsers();
+                ICollection<UserModel> usersForShow = new List<UserModel>();
+                foreach(var item in users)
+                {
+                    usersForShow.Add(new UserModel
+                    {
+                        Login = item.Login,
+                        Password = item.Password,
+                        ManagerName = db.GetManagerName(item.ManagerId)
+                    });
+                }
+                ViewBag.Users = usersForShow.AsEnumerable();
             }
             return View();
         }

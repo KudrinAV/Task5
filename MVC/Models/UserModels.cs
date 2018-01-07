@@ -20,4 +20,13 @@ namespace MVC.Models
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string NewPassword { get; set; }
     }
+    
+    public class UserModel
+    {
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string ManagerName { get; set; }
+    }
+
+
 }
