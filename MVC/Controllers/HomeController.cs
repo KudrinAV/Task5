@@ -10,6 +10,8 @@ namespace MVC.Controllers
     {
         public ActionResult Index()
         {
+            if (User.IsInRole("admin"))  return RedirectToAction("Index", "Admin");
+            if (User.IsInRole("user")) return RedirectToAction("Index", "User");
             return View();
         }
 
