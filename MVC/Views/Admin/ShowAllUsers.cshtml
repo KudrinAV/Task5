@@ -3,6 +3,7 @@
     ViewBag.Title = "ShowAllUsers";
 }
 
+
 <div>
     <h3>Все пользователи</h3>
     <table class="table table-bordered table-hover">
@@ -20,8 +21,10 @@
                 <td><p>@item.Password</p></td>
                 <td><p>@item.ManagerName</p></td>
                 <td><p>@Html.ActionLink("Изменить", "EditUser", "Admin", new { login = item.Login }, null)</p></td>
-                <td><p>@Html.ActionLink("Удалить", "DeleteUser", "Admin", new { login = item.Login }, null)</p></td>
+                <td>@Ajax.ActionLink("Удалить", "DeleteUser", "Admin", new { login = item.Login} , new AjaxOptions { HttpMethod= "POST", Confirm="Вы действительно хотите удалить пользователя?", OnSuccess="" })</td>
            </tr>
         }
     </table>
 </div>
+
+@Scripts.Render("~/scripts/jquery-1.10.2.js")       

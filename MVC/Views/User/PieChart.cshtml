@@ -2,7 +2,6 @@
 <script type="text/javascript">
      // Подгружаем API
       google.load('visualization', '1.0', { 'packages': ['corechart'] });
-        // Устанавливаем callback
         google.setOnLoadCallback(drawChart);
         function drawChart()
         {
@@ -25,7 +24,6 @@
                                     [d.ManagerName, d.NumberOfSales]
                                 );
                             });
-                            // Отрисовка диаграммы
                             var chart = new google.visualization.PieChart(
                                                 document.getElementById('n'));
                             chart.draw(data, options);

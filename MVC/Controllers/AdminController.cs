@@ -97,7 +97,7 @@ namespace MVC.Controllers
             return View();
         }
 
-
+        [HttpPost]
         [Authorize(Roles = "admin")]
         public ActionResult DeleteUser(string login)
         {
@@ -171,17 +171,6 @@ namespace MVC.Controllers
                 }
             }
 
-            return View();
-        }
-
-
-        [Authorize(Roles = "admin")]
-        public ActionResult DeleteManager(string name)
-        {
-            using (IBridgeToBLL db = new BridgeToBLL())
-            {
-                if (db.DeleteManager(name)) return RedirectToAction("ShowAllManagers", "Admin");
-            }
             return View();
         }
 
@@ -303,6 +292,7 @@ namespace MVC.Controllers
 
 
         [Authorize(Roles = "admin")]
+        [HttpPost]
         public ActionResult DeleteSale(int Id)
         {
             using (IBridgeToBLL db = new BridgeToBLL())

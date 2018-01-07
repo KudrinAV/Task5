@@ -19,7 +19,6 @@
             <tr>
                 <td><p>@item.LastName</p></td>
                 <td><p>@Html.ActionLink("Изменить", "EditManager", "Admin", new { name = item.LastName }, null)</p></td>
-                <td><p>@Html.ActionLink("Удалить", "DeleteManager", "Admin", new { name = item.LastName }, null)</p></td>
             </tr>
         }
     </table>

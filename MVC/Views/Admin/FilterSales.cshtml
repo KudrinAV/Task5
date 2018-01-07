@@ -24,7 +24,7 @@
                 @Html.DisplayFor(modelItem => item.Product)
             </td>
             <td><p>@Html.ActionLink("Изменить", "EditSale", "Admin", new { id = item.SaleId }, null)</p></td>
-            <td><p>@Html.ActionLink("Удалить", "DeleteSale", "Admin", new { id = item.SaleId }, null)</p></td>
+            <td><p>@Ajax.ActionLink("Удалить", "DeleteSale", "Admin", new { id = item.SaleId }, new AjaxOptions { HttpMethod = "POST", Confirm = "Вы действительно хотите удалить данные о продаже?", OnSuccess = "window.location.reload()" })</p></td>
         </tr>
     }
 </table>
