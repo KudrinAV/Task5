@@ -160,7 +160,7 @@
     </Compile>
     <Compile Include="Models\AuthencationModels.cs" />
     <Compile Include="Models\ChartModels.cs" />
-    <Compile Include="Models\EditUserModel.cs" />
+    <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\FilterModels.cs" />
     <Compile Include="Models\ManagerModels.cs" />
     <Compile Include="Models\SaleModels.cs" />
