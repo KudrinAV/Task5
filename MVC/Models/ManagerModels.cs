@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,7 @@ namespace MVC.Models
 
         [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
+        [DisplayName("Новое имя менеджера")]
         public string NewName { get; set; }
     }
 }

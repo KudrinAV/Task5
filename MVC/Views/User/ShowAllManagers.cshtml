@@ -3,13 +3,12 @@
     ViewBag.Title = "ShowAllManagers";
 }
 
-<h2>ShowAllManagers</h2>
+<h2>Действующие менеджеры</h2>
 
 <div>
-    <h3>Все пользователи</h3>
     <table class="table table-bordered table-hover">
         <tr>
-            <td><p>Name</p></td>
+            <td><p>Имя</p></td>
         </tr>
         @foreach (var item in ViewBag.Managers)
         {
