@@ -35,7 +35,7 @@ namespace MVC.Controllers
                     else ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
 
                 }
-            }
+            };
 
             return View(model);
         }

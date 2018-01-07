@@ -111,38 +111,9 @@ namespace MVC.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult ManagerSearch(string name)
-        {
-            using (IBridgeToBLL db = new BridgeToBLL())
-            {
 
-                return PartialView(db.FilterByManager(name));
-
-            }
-        }
-
-        [HttpPost]
-        public ActionResult ProductSearch(string product)
-        {
-            using (IBridgeToBLL db = new BridgeToBLL())
-            {
-
-                return PartialView(db.FilterByProduct(product));
-
-            }
-        }
-
-        [HttpPost]
-        public ActionResult DateSearch(DateTime date)
-        {
-            using (IBridgeToBLL db = new BridgeToBLL())
-            {
-
-                return PartialView(db.FilterByDate(date));
-
-            }
-        }
+      
+       
 
         [Authorize(Roles = "user")]
         public ActionResult ShowAllManagers()

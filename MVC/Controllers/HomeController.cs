@@ -10,24 +10,8 @@ namespace MVC.Controllers
     {
         public ActionResult Index()
         {
-            if (User.IsInRole("admin"))  return RedirectToAction("Index", "Admin");
+            if (User.IsInRole("admin")) return RedirectToAction("Index", "Admin");
             if (User.IsInRole("user")) return RedirectToAction("Index", "User");
-            return View();
-        }
-
-        [Authorize(Roles = "admin, user")]
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        [Authorize(Roles="admin")]
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
