@@ -9,7 +9,7 @@ namespace MVC.Models
     public class SaleModel
     {
         public int Id { get; set; }
-        [RegularExpression(@"[A-Za-z]+", ErrorMessage = "Используйте только символы и цифры")]
+        [RegularExpression(@"[A-Za-z]+", ErrorMessage = "Используйте только символы")]
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string Client { get; set; }
 

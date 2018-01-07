@@ -90,7 +90,7 @@ namespace MVC.Controllers
             {
                 using (IBridgeToBLL db = new BridgeToBLL())
                 {
-                    if (db.EditUser(user.OldLogin, user.NewLogin, user.NewPassword)) return RedirectToAction("ShowAllUsers", "Admin");
+                    if (db.EditUser(user.OldLogin, user.NewLogin, user.NewPassword, user.NewManagerName)) return RedirectToAction("ShowAllUsers", "Admin");
                     else ModelState.AddModelError("", "Неудалось изменить аккаунт");
                 }
             }

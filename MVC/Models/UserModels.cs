@@ -19,6 +19,10 @@ namespace MVC.Models
         [RegularExpression(@"[\w]+", ErrorMessage = "Используйте только символы и цифры")]
         [StringLength(20, ErrorMessage = "Не больше 20 символов")]
         public string NewPassword { get; set; }
+
+        [RegularExpression(@"[A-Za-z]+", ErrorMessage = "Используйте только символы")]
+        [StringLength(20, ErrorMessage = "Не больше 20 символов")]
+        public string NewManagerName { get; set; }
     }
     
     public class UserModel
