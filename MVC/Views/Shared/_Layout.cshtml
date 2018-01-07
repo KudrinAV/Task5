@@ -23,6 +23,7 @@
                         <li>@Html.ActionLink("Меню", "Index", "Home")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <p class="navbar-text ">Привет, @User.Identity.Name!</p>
                         <li>@Html.ActionLink("Выход", "LogOff", "Account")</li>
                     </ul>
                 </div>
@@ -34,7 +35,7 @@
                         <li>@Html.ActionLink("Меню", "Index", "Home")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li style="float:right">@Html.ActionLink("Вход", "Login", "Account")</li>
+                        <li >@Html.ActionLink("Вход", "Login", "Account")</li>
                     </ul>
                 </div>
             }
