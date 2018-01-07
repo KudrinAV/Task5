@@ -1,36 +1,20 @@
-﻿<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-     // Подгружаем API
-      google.load('visualization', '1.0', { 'packages': ['corechart'] });
-        // Устанавливаем callback
-        google.setOnLoadCallback(drawChart);
-        function drawChart()
-        {
-             var options = {
-             'title': 'Sales By Manager',
-             'width': 400,
-             'height': 300
-             };
-             var data = new google.visualization.DataTable();
-                data.addColumn('string', 'ManagerName');
-                data.addColumn('number', 'NumberOfSales');
+﻿@{
+    ViewBag.Title = "Index";
+}
 
-                $.getJSON('@Url.Action("DrawChart", "User")', null,
-                    function (result)
-                    {
-                        if (result.Data.length)
-                        {
-                            $.each(result.Data, function (index, d) {
-                                data.addRow(
-                                    [d.ManagerName, d.NumberOfSales]
-                                );
-                            });
-                            // Отрисовка диаграммы
-                            var chart = new google.visualization.PieChart(
-                                                document.getElementById('n'));
-                            chart.draw(data, options);
-                        };
-                    });
-         }
-</script>
-<div id="n"></div> 
+<h2>Админка</h2>
+
+<div>
+    @Html.ActionLink("Просмотреть график", "PieChart")
+</div>
+<div>
+    @Html.ActionLink("Просмотреть всех менеджеров", "ShowAllManagers")
+</div>
+
+<div>
+    @Html.ActionLink("Все продажи", "ShowAllSales")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

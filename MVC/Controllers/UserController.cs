@@ -20,6 +20,11 @@ namespace MVC.Controllers
             return View();
         }
 
+        public ActionResult PieChart()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "user")]
         public ActionResult ShowAllSales()
         {
