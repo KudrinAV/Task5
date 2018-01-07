@@ -110,15 +110,18 @@ namespace BLL.Bridges
             return result; ;
         }
 
-        public bool CreateUser(string login, string password)
+        public bool CreateUser(string managerName, string login, string password)
         {
             if (_db.Users.Get(x => x.Login == login).Any()) return false;
             else
             {
+                if (!_db.Managers.Get(x => x.LastName == managerName).Any())
+                    AddManager(new ManagerDTO(managerName));
                 _db.Users.Create(new User
                 {
                     Login = login,
                     Password = password,
+                    ManagerId = _db.Managers.Get(x => x.LastName == managerName).FirstOrDefault().ManagerID,
                     RoleId = 2
                 });
                 _db.Save();
@@ -136,13 +139,25 @@ namespace BLL.Bridges
             return mapper.Map<IEnumerable<User>, List<UserDTO>>(_db.Users.Get());
         }
 
-        public bool EditUser(string oldLogin, string newLogin, string newPassword)
+        public bool EditUser(string oldLogin, string newLogin, string newPassword, string newManagerName)
         {
             User user = _db.Users.Get(x => x.Login == oldLogin).FirstOrDefault();
             if (user != null)
             {
                 if (newLogin != null) user.Login = newLogin;
                 if (newPassword != null) user.Password = newPassword;
+                if (newManagerName !=null)
+                {
+                    if (CheckManager(newManagerName))
+                    {
+                        user.ManagerId = _db.Managers.Get(x => x.LastName == newManagerName).FirstOrDefault().ManagerID;
+                    }
+                    else
+                    {
+                        CreateManager(newManagerName);
+                        user.ManagerId = _db.Managers.Get(x => x.LastName == newManagerName).FirstOrDefault().ManagerID;
+                    }
+                }
                 _db.Users.Update(user);
                 _db.Save();
                 return true;
@@ -175,7 +190,7 @@ namespace BLL.Bridges
 
         public bool CreateManager(string name)
         {
-            if (_db.Managers.Get(x => x.LastName == name).Any()) return false;
+            if (CheckManager(name)) return false;
             else
             {
                 AddManager(new ManagerDTO(name));
@@ -247,45 +262,16 @@ namespace BLL.Bridges
             }
             else return false;
         }
-
-        public IEnumerable<SaleDTO> FilterByManager(string name)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Sale, SaleDTO>();
-            });
-            IMapper mapper = config.CreateMapper();
-            Manager manager = _db.Managers.Get(x => x.LastName == name).FirstOrDefault();
-            if (manager != null)
-            {
-                return mapper.Map<IEnumerable<Sale>, List<SaleDTO>>(_db.Sales.Get(x => x.ManagerId == manager.ManagerID));
-            }
-            else return mapper.Map<IEnumerable<Sale>, List<SaleDTO>>(_db.Sales.Get());
-        }
-
-        public IEnumerable<SaleDTO> FilterByProduct(string product)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Sale, SaleDTO>();
-            });
-            IMapper mapper = config.CreateMapper();
-            return mapper.Map<IEnumerable<Sale>, List<SaleDTO>>(_db.Sales.Get(x => x.Product.Contains(product)));
-        }
-
-        public IEnumerable<SaleDTO> FilterByDate(DateTime date)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Sale, SaleDTO>();
-            });
-            IMapper mapper = config.CreateMapper();
-            return mapper.Map<IEnumerable<Sale>, List<SaleDTO>>(_db.Sales.Get(x => x.Date.Day==date.Day && x.Date.Month==date.Month && x.Date.Year==date.Year));
-        }
+      
 
         public int GetManagerIdForUser(string login)
         {
             return _db.Users.Get(x => x.Login == login).FirstOrDefault().ManagerId;
+        }
+
+        public string GetManagerName(int id)
+        {
+            return _db.Managers.Get(x => x.ManagerID == id).FirstOrDefault().LastName;
         }
     }
 }

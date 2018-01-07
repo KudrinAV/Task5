@@ -49,9 +49,9 @@ namespace PresentationLayer.Bridge
             return _dbConnect.GetRoles(login);
         }
 
-        public bool CreateUser(string login, string password)
+        public bool CreateUser(string managerName, string login, string password)
         {
-            return _dbConnect.CreateUser(login, password);
+            return _dbConnect.CreateUser(managerName, login, password);
         }
 
         public IEnumerable<UserViewModel> GetUsers()
@@ -66,9 +66,9 @@ namespace PresentationLayer.Bridge
             return mapper.Map<IEnumerable<UserDTO>, List<UserViewModel>>(_dbConnect.GetUsers());
         }
 
-        public bool EditUser(string oldLogin, string newLogin, string newPassword)
+        public bool EditUser(string oldLogin, string newLogin, string newPassword, string newManagerName)
         {
-            return _dbConnect.EditUser(oldLogin, newLogin, newPassword);
+            return _dbConnect.EditUser(oldLogin, newLogin, newPassword, newManagerName);
         }
 
         public bool DeleteUser(string login)
@@ -134,39 +134,14 @@ namespace PresentationLayer.Bridge
             return _dbConnect.DeleteSale(Id);
         }
 
-        public IEnumerable<SaleViewModel> FilterByManager(string name)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<SaleDTO, SaleViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
-            return mapper.Map<IEnumerable<SaleDTO>, List<SaleViewModel>>(_dbConnect.FilterByManager(name));
-        }
-
-        public IEnumerable<SaleViewModel> FilterByProduct(string product)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<SaleDTO, SaleViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
-            return mapper.Map<IEnumerable<SaleDTO>, List<SaleViewModel>>(_dbConnect.FilterByProduct(product));
-        }
-
-        public IEnumerable<SaleViewModel> FilterByDate(DateTime date)
-        {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<SaleDTO, SaleViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
-            return mapper.Map<IEnumerable<SaleDTO>, List<SaleViewModel>>(_dbConnect.FilterByDate(date));
-        }
-
         public int GetManagerIdForUser(string login)
         {
             return _dbConnect.GetManagerIdForUser(login);
+        }
+
+        public string GetManagerName(int id)
+        {
+            return _dbConnect.GetManagerName(id);
         }
     }
 }

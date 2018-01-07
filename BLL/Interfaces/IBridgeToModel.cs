@@ -20,9 +20,9 @@ namespace BLL.Interfaces
         IEnumerable<SaleDTO> GetSales();
         bool CheckUser(string login, string password);
         string[] GetRoles(string login);
-        bool CreateUser( string login, string password);
+        bool CreateUser(string managerName, string login, string password);
         IEnumerable<UserDTO> GetUsers();
-        bool EditUser(string oldLogin, string newLogin, string newPassword);
+        bool EditUser(string oldLogin, string newLogin, string newPassword, string newManagerName);
         bool DeleteUser(string login);
         IEnumerable<ManagerDTO> GetManagers();
         bool CreateManager(string Name);
@@ -31,9 +31,7 @@ namespace BLL.Interfaces
         bool CreateSale(SaleDTO sale);
         bool EditSale(int Id, SaleDTO sale);
         bool DeleteSale(int Id);
-        IEnumerable<SaleDTO> FilterByManager(string name);
-        IEnumerable<SaleDTO> FilterByProduct(string product);
-        IEnumerable<SaleDTO> FilterByDate(DateTime date);
         int GetManagerIdForUser(string login);
+        string GetManagerName(int id);
     }
 }
